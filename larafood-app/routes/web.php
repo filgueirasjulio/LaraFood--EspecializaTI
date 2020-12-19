@@ -1,25 +1,32 @@
 <?php
 
-//plans routes
-Route::any('admin/planos/search', 'Admin\PlanController@search')->name('plans.search');
+Route::prefix('admin')->namespace('Admin')->group(function() {
 
-Route::get('admin/planos', 'Admin\PlanController@index')->name('plans.index');
-Route::get('admin/planos/create', 'Admin\PlanController@create')->name('plans.create');
-Route::get('admin/planos/{url}', 'Admin\PlanController@show')->name('plans.show');
-Route::get('admin/planos/{url}/edit', 'Admin\PlanController@edit')->name('plans.edit');
+    /** routes plans */
+    Route::any('/planos/search', 'PlanController@search')->name('plans.search');
 
-Route::post('admin/planos/create', 'Admin\PlanController@store')->name('plans.store');
-Route::put('admin/planos/{url}', 'Admin\PlanController@update')->name('plans.update');
-Route::delete('admin/planos/{url}', 'Admin\PlanController@destroy')->name('plans.destroy');
+    Route::get('/planos', 'PlanController@index')->name('plans.index');
+    Route::get('/planos/create', 'PlanController@create')->name('plans.create');
+    Route::get('/planos/{url}', 'PlanController@show')->name('plans.show');
+    Route::get('/planos/{url}/edit', 'PlanController@edit')->name('plans.edit');
 
-//plans routes end
+    Route::post('/planos/create', 'PlanController@store')->name('plans.store');
+    Route::put('/planos/{url}', 'PlanController@update')->name('plans.update');
+    Route::delete('/planos/{url}', 'PlanController@destroy')->name('plans.destroy');
 
+    /** routes details plans */
+    Route::any('/planos/{url}/detalhes/search', 'DetailPlanController@search')->name('plans.details.search');
+
+    Route::get('/planos/{url}/detalhes/create', 'DetailPlanController@create')->name('details.plan.create');
+    Route::get('/planos/{url}/detalhes', 'DetailPlanController@index')->name('details.plan.index');
+    Route::get('/planos/{url}/detalhes/{idDetalhe}/edit', 'DetailPlanController@edit')->name('details.plan.edit');
+   
+    Route::post('/planos/{url}/detalhes', 'DetailPlanController@store')->name('details.plan.store');       
+    Route::put('/planos/{url}/detalhes/{idDetalhe}', 'DetailPlanController@update')->name('details.plan.update'); 
+    Route::delete('/planos/{url}/detalhes/{idDetalhe}', 'DetailPlanController@destroy')->name('details.plan.destroy'); 
+});
+
+/** home dashboard */
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
-
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');

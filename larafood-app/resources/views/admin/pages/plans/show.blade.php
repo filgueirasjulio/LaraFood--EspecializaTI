@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Detalhes - Plano {{$plan->name}}</h1>
+            <h1>Detalhes - Plano {{$plan->name}}</h1> <a href="{{route('plans.index')}}" class="btn btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>
         </div>
     </div>
 @stop
@@ -27,10 +27,11 @@
                     <strong>Descrição: </strong> {{$plan->description}}
                 </li>
                 <li>
+                    @include('admin.includes.alerts')
                     <form action="{{route('plans.destroy', $plan->url)}}" method="POST">
                         @csrf 
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
+                        <button type="submit" class="btn btn-danger"  alt="Remover">
                             <strong style="font-size:16px;padding-right:5px;"><i class="fas fa-trash-alt"></i></strong>  Deletar 
                         </button>
                     </form>
