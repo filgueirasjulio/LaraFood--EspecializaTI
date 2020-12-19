@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdatePlan;
 use App\Models\Plan;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreUpdatePlan;
 
 class PlanController extends Controller
 {
@@ -32,7 +32,9 @@ class PlanController extends Controller
     {
         $this->repository->create($request->all());
 
-        return redirect()->route('plans.index');
+        return redirect()
+               ->route('plans.index')
+               ->with('message', 'Plano cadastrado com sucesso!');
     }
 
     public function show($url)
@@ -47,14 +49,24 @@ class PlanController extends Controller
 
     public function destroy($url)
     {
-        $plan = $this->repository->where('url', $url)->first();
+        $plan = $this->repository
+            ->with('details')
+            ->where('url', $url)->first();
         if (!$plan) {
             return redirect()->back();
         }
 
+        if ($plan->details()->count() > 0) {
+            return redirect()
+                ->back()
+                ->with('error', 'Não foi possível remover o plano, existem detalhes vinculados ao mesmo!');
+        }
+
         $plan->delete();
 
-        return redirect()->route('plans.index');
+        return redirect()
+                ->route('plans.index')
+                ->with('message', 'Plano removido com sucesso!');
     }
 
     public function search(Request $request)
@@ -84,9 +96,11 @@ class PlanController extends Controller
         if (!$plan) {
             return redirect()->back();
         }
-        
+
         $plan->update($request->all());
-        
-        return redirect()->route('plans.index');
+
+        return redirect()
+                ->route('plans.index')
+                ->with('message', 'Plano editado com sucesso!');
     }
 }
