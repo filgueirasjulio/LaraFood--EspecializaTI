@@ -234,7 +234,12 @@ return [
         [
             'text' => 'Planos',
             'url' => 'admin/planos',
-            'icon' => 'fas fa-clipboard-list'
+            'icon' => 'fas fa-clipboard-list',
+        ],
+        [
+            'text' => 'Perfis',
+            'url' => 'admin/perfis',
+            'icon' => 'fas fa-users',
         ],
     ],
 
