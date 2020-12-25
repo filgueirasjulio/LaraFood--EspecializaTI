@@ -241,6 +241,11 @@ return [
             'url' => 'admin/perfis',
             'icon' => 'fas fa-users',
         ],
+        [
+            'text' => 'Permissões',
+            'url' => 'admin/permissoes',
+            'icon' => 'fas fa-key',
+        ],
     ],
 
     /*

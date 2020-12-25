@@ -36,6 +36,18 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::post('/perfis/create', 'ACL\ProfileController@store')->name('profiles.store');
     Route::put('/perfis/{id}', 'ACL\ProfileController@update')->name('profiles.update');
     Route::delete('/perfis/{id}', 'ACL\ProfileController@destroy')->name('profiles.destroy');
+
+    /** routes profiles */
+    Route::any('/permissoes/search', 'ACL\PermissionController@search')->name('permissions.search');
+
+    Route::get('/permissoes', 'ACL\PermissionController@index')->name('permissions.index');
+    Route::get('/permissoes/create', 'ACL\PermissionController@create')->name('permissions.create');
+    Route::get('/permissoes/{id}', 'ACL\PermissionController@show')->name('permissions.show');
+    Route::get('/permissoes/{id}/edit', 'ACL\PermissionController@edit')->name('permissions.edit');
+
+    Route::post('/permissoes/create', 'ACL\PermissionController@store')->name('permissions.store');
+    Route::put('/permissoes/{id}', 'ACL\PermissionController@update')->name('permissions.update');
+    Route::delete('/permissoes/{id}', 'ACL\PermissionController@destroy')->name('permissions.destroy');
 });
 
 /** home dashboard */

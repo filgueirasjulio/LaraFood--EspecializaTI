@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdatePlan;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdatePlan;
 
 class PlanController extends Controller
 {
@@ -72,6 +72,7 @@ class PlanController extends Controller
     public function search(Request $request)
     {
         $filter = $request->except('_token');
+
         $plans = $this->repository->search($request->filter);
 
         return view('admin.pages.plans.index', [
