@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
@@ -14,5 +15,13 @@ class Permission extends Model
                         ->orWhere('description', 'LIKE', "%{$filter}%")
                         ->paginate();
         return $results;
+    }
+
+    /**
+     * Get Profiles
+     */
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
     }
 }
