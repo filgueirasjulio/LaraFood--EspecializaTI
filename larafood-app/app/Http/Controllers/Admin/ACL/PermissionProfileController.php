@@ -28,4 +28,39 @@ class PermissionProfileController extends Controller
 
         return view('admin.pages.profiles.permissions.permissions', compact('profile', 'permissions'));
     }
+
+    public function permissionsAvailable($idProfile)
+    {
+        if(!$profile = $this->profile->find($idProfile)) {
+            return redirect()->back();
+        }
+
+        $permissions = $this->permission->paginate();
+
+        return view('admin.pages.profiles.permissions.available', compact('profile', 'permissions'));
+    }
+
+    public function attachPermissionsProfile(Request $request, $idProfile)
+    {
+        if(!$profile = $this->profile->find($idProfile)) {
+            return redirect()->back();
+        }
+
+        if(!$request->permissions || count($request->permissions) == 0) {
+            return redirect()->back()
+                             ->with('warning', 'Selecione pelo menos uma permissão!');
+        }
+
+        $profile->permissions()->attach($request->permissions);
+
+        if(count($request->permissions) == 1) {
+            return redirect()
+            ->route('profiles.permissions', $profile->id)
+            ->with('message', 'Permissão vinculada com sucesso!');
+        } else {
+            return redirect()
+            ->route('profiles.permissions', $profile->id)
+            ->with('message', 'Permissões vinculadas com sucesso!');
+        }
+    }
 }

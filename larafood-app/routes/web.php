@@ -32,7 +32,6 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::get('/perfis/create', 'ACL\ProfileController@create')->name('profiles.create');
     Route::get('/perfis/{id}', 'ACL\ProfileController@show')->name('profiles.show');
     Route::get('/perfis/{id}/edit', 'ACL\ProfileController@edit')->name('profiles.edit');
-    Route::get('/perfis/{id}/permissoes', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
 
     Route::post('/perfis/create', 'ACL\ProfileController@store')->name('profiles.store');
     Route::put('/perfis/{id}', 'ACL\ProfileController@update')->name('profiles.update');
@@ -50,6 +49,12 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::put('/permissoes/{id}', 'ACL\PermissionController@update')->name('permissions.update');
     Route::delete('/permissoes/{id}', 'ACL\PermissionController@destroy')->name('permissions.destroy');
 
+    /** routes profiles X permissions */
+    Route::get('/perfis/{id}/permissoes/add', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
+    Route::get('/perfis/{id}/permissoes', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
+
+    Route::post('/perfis/{id}/permissoes/add', 'ACL\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
+   
 });
 
 /** home dashboard */

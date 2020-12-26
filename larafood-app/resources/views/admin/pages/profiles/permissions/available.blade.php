@@ -1,12 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Permissões')
+@section('title', 'Permissões disponíveis')
 
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Permissões do perfil {{$profile->name}} </h1> <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark"><strong
-                    style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> permissão</a>
+            <h1>Permissões disponíveis para o perfil {{$profile->name}} </h1> <a href="{{route('profiles.permissions', $profile->id )}}" class="btn btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>
         </div>
     </div>
 @stop
@@ -28,17 +27,30 @@
                 @if ($permissions->count())
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                        </tr>
+                           <th width="50px">#</th>
+                           <th>Nome<th>
                     </thead>
                     <tbody>
-                        @foreach ($permissions as $permission)
+                        <form action="{{ route('profiles.permissions.attach', $profile->id) }}" method="POST">
+                            @csrf
+                            @foreach ($permissions as $permission)
                             <tr>
                                 <td>
-                                    {{ $permission->name }}
+                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}">
                                 </td>
+                                <td>
+                                    {{ $permission->name }}
+                               </td>
                             </tr>
                         @endforeach
+                            <tr>
+                                <td colspan="500">
+                                    <button type="submit" class="btn btn-dark">
+                                        Vincular
+                                    </button>
+                                </td>
+                            </tr>
+                        </form>
                     </tbody>
                 @else
                     <tbody>
