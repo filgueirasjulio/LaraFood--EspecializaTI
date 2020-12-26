@@ -13,7 +13,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{ route('profiles.search') }}" method="POST" class="form form-inline">
+            <form action="{{ route('profiles.permissions.available.search', $profile->id) }}" method="POST" class="form form-inline">
                 @csrf
                 <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
                 <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>

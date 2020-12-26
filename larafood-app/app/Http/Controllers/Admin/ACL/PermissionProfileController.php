@@ -63,4 +63,16 @@ class PermissionProfileController extends Controller
             ->with('message', 'Permissões vinculadas com sucesso!');
         }
     }
+
+    public function filterPermissionsAvailable(Request $request, $idProfile)
+    {
+        if(!$profile = $this->profile->find($idProfile)) {
+            return redirect()->back();
+        }
+
+        $filter = $request->except('_token');
+        $permissions = $profile->permissionsAvailable($request->filter);
+
+        return view('admin.pages.profiles.permissions.available', compact('profile', 'filter', 'permissions'));
+    }
 }
