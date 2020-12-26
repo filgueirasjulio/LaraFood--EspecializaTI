@@ -51,7 +51,8 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
 
     /** routes profiles X permissions */
     Route::any('/perfis/{id}/permissoes/search', 'ACL\PermissionProfileController@filterPermissionsAvailable')->name('profiles.permissions.available.search');
-
+    Route::any('/perfis/{id}/search/permissoes', 'ACL\PermissionProfileController@filterAllPermissions')->name('profiles.permissions.search');
+    
     Route::get('/perfis/{id}/permissoes/add', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
     Route::get('/perfis/{id}/permissoes', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
 
