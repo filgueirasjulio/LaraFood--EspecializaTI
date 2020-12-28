@@ -25,8 +25,9 @@ class ProfileController extends Controller
     public function index()
     {
         $profiles = $this->repository->latest()->paginate();
+        $filter = '';
 
-        return view('admin.pages.profiles.index', ['profiles' => $profiles]);
+        return view('admin.pages.profiles.index', compact('profiles', 'filter'));
     }
 
     /**

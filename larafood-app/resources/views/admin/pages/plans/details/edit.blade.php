@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar detalhe')
+@section('title', "Editar - {$plan->name}")
 
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Editar detalhe do plano {{ $plan->name }}</h1> <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>
+            <h1>Editar detalhe do {{ $plan->name }}</h1> <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>
         </div>
     </div>
 @stop

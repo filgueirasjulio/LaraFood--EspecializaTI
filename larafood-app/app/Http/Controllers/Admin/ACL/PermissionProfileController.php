@@ -25,8 +25,9 @@ class PermissionProfileController extends Controller
         }
       
         $permissions = $profile->permissions()->latest()->paginate();
+        $filter = '';
 
-        return view('admin.pages.profiles.permissions.permissions', compact('profile', 'permissions'));
+        return view('admin.pages.profiles.permissions.permissions', compact('profile', 'permissions', 'filter'));
     }
 
     public function profiles($idPermission)
@@ -37,8 +38,9 @@ class PermissionProfileController extends Controller
         }
 
         $profiles = $permission->profiles()->latest()->paginate();
-
-        return view('admin.pages.permissions.profiles.profiles', compact('permission', 'profiles'));
+        $filter = '';
+        
+        return view('admin.pages.permissions.profiles.profiles', compact('permission', 'profiles', 'filter'));
     }
 
     public function permissionsAvailable($idProfile)
@@ -48,8 +50,9 @@ class PermissionProfileController extends Controller
         }
 
         $permissions = $profile->permissionsAvailable();
+        $filter = '';
 
-        return view('admin.pages.profiles.permissions.available', compact('profile', 'permissions'));
+        return view('admin.pages.profiles.permissions.available', compact('profile', 'permissions', 'filter'));
     }
 
     public function attachPermissionsProfile(Request $request, $idProfile)

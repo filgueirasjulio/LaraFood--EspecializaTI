@@ -1,13 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', "Detalhes do plano {$plan->name}")
+@section('title', "Detalhes - {$plan->name}")
 
 @section('content_header')
+    <div class="d-flex flex-row-reverse">
+        <a href="{{ route('plans.index') }}" class="btn btn-sm btn-dark" style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></a>
+    </div>
 
-    <div class="container">
+    <div class="container" style="margin-top:15px;">
         <div class="row justify-content-between">
-            <h1>Detalhes - Plano {{ $plan->name }}</h1> <a href="{{ route('plans.index') }}" class="btn btn-dark"><strong
-                    style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>
+            <h1>Detalhes do {{ $plan->name }}</h1> <a href="{{ route('details.plan.create', $plan->url) }}" class="btn btn-dark"><strong
+                style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> detalhe</a>
         </div>
     </div>
 @stop
@@ -15,14 +18,18 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <div class="d-flex justify-content-between">
-                <form action="{{ route('plans.details.search', $plan->url) }}" method="POST" class="form form-inline">
+            <div class="d-flex">
+                <form action="{{ route('plans.details.search', $plan->url) }}" method="POST" class="d-flex">
                     @csrf
                     <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
                     <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
                 </form>
-                <a href="{{ route('details.plan.create', $plan->url) }}" class="btn btn-dark"><strong
-                        style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> detalhe</a>
+                @if($filter && $filter != '')
+                <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
+                    <a href="{{route('details.plan.index', $plan->url)}}"><i class="fas fa-sync-alt" style="padding-left:5px;"></i></a>
+                </strong> 
+                <hr>
+            @endif
             </div>
         </div>
         <div class="card-body">

@@ -13,14 +13,20 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{ route('profiles.permissions.available.search', $profile->id) }}" method="POST" class="form form-inline">
-                @csrf
-                <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
-                <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
-            </form>
+            <div class="d-flex">
+                <form action="{{ route('profiles.permissions.available.search', $profile->id) }}" method="POST" class="d-flex">
+                    @csrf
+                    <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
+                    <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-search"></i></button>
+                </form>
+                @if($filter && $filter != '')
+                    <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
+                        <a href="{{route('profiles.permissions.available', $profile->id)}}"><i class="fas fa-sync-alt" style="padding-left:5px;"></i></a>
+                    </strong> 
+                @endif
+            </div>
         </div>
-        <div class="card-body">
-
+        <div class="card-body table-responsive">
             @include('admin.includes.alerts')
 
             <table class="table table-condensed">

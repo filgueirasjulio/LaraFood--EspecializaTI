@@ -25,11 +25,9 @@ class DetailPlanController extends Controller
         }
 
         $details = $plan->details()->latest()->paginate();
+        $filter = '';
 
-        return view('admin.pages.plans.details.index', [
-            'details' => $details,
-            'plan' => $plan,
-        ]);
+        return view('admin.pages.plans.details.index', compact('plan', 'details', 'filter'));
     }
 
     public function create($urlPlan)

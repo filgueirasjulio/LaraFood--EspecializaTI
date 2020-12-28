@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Plano')
+@section('title', "Editar - {$plan->name}")
 
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Editar Plano {{$plan->name}}</h1> <a href="{{route('plans.index')}}" class="btn btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>  
+            <h1>Editar {{$plan->name}}</h1> <a href="{{route('plans.index')}}" class="btn btn-sm btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>  
         </div>
     </div>
 @stop

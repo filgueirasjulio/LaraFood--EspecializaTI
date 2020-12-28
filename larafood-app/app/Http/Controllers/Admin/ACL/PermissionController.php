@@ -25,8 +25,9 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = $this->repository->latest()->paginate();
+        $filter = '';
 
-        return view('admin.pages.permissions.index', compact('permissions'));
+        return view('admin.pages.permissions.index', compact('permissions', 'filter'));
     }
     
     /**

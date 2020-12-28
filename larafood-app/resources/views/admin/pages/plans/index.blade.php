@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Plano</h1> <a href="{{ route('plans.create') }}" class="btn btn-dark"><strong
+            <h1>Plano</h1> <a href="{{ route('plans.create') }}" class="btn btn-sm btn-dark"><strong
                     style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> plano</a>
         </div>
     </div>
@@ -14,13 +14,20 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{ route('plans.search') }}" method="POST" class="form form-inline">
-                @csrf
-                <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
-                <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
-            </form>
+            <div class="d-flex">
+                <form action="{{ route('plans.search') }}" method="POST" class="d-flex">
+                    @csrf
+                    <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
+                    <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                </form>
+                @if($filter && $filter != '')
+                    <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
+                        <a href="{{route('plans.index')}}"><i class="fas fa-sync-alt" style="padding-left:5px;"></i></a>
+                    </strong> 
+                @endif
+            </div>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive p-0">
 
             @include('admin.includes.alerts')
 
@@ -47,11 +54,11 @@
                                     {{ $plan->description }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-info" alt="Ver"
+                                    <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-sm btn-info" alt="Ver"
                                         title="Ver"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-warning" alt="Editar"
+                                    <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-sm btn-warning" alt="Editar"
                                         title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-secondary"
+                                    <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-sm btn-secondary"
                                         alt="Detalhes" title="Detalhes"><i class="fas fa-asterisk"></i></a>
                                 </td>
                             </tr>

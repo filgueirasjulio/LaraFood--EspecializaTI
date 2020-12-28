@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', "Perfis da permissão - {$permission->name}")
+@section('title', "Perfis - {$permission->name}")
 
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Perfis da permissão - {{$permission->name}} </h1> <a href="{{route('permissions.index')}}" class="btn btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>  
+            <h1>Perfis - {{$permission->name}} </h1> <a href="{{route('permissions.index')}}" class="btn btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>  
         </div>
     </div>
 @stop
@@ -13,14 +13,21 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{ route('permissions.profiles.search', $permission->id) }}" method="POST" class="form form-inline">
-                @csrf
-                <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
-                <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
-            </form>
+            <div class="d-flex">
+                <form action="{{ route('permissions.profiles.search', $permission->id) }}" method="POST" class="d-flex">
+                    @csrf
+                    <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
+                    <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                </form>
+                @if($filter && $filter != '')
+                    <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
+                        <a href="{{route('permissions.profiles', $permission->id)}}"><i class="fas fa-sync-alt" style="padding-left:5px;"></i></a>
+                    </strong> 
+                    <hr>
+                @endif
+            </div>
         </div>
         <div class="card-body">
-
             @include('admin.includes.alerts')
 
             <table class="table table-condensed">
