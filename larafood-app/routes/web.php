@@ -3,61 +3,61 @@
 Route::prefix('admin')->namespace('Admin')->group(function() {
 
     /** routes plans */
-    Route::any('/planos/search', 'PlanController@search')->name('plans.search');
+    Route::any('/planos/busca', 'PlanController@search')->name('plans.search');
 
     Route::get('/planos', 'PlanController@index')->name('plans.index');
-    Route::get('/planos/create', 'PlanController@create')->name('plans.create');
-    Route::get('/planos/{url}', 'PlanController@show')->name('plans.show');
-    Route::get('/planos/{url}/edit', 'PlanController@edit')->name('plans.edit');
+    Route::get('/plano/cadastro', 'PlanController@create')->name('plans.create');
+    Route::get('/plano/{url}', 'PlanController@show')->name('plans.show');
+    Route::get('/plano/{url}/edicao', 'PlanController@edit')->name('plans.edit');
 
-    Route::post('/planos/create', 'PlanController@store')->name('plans.store');
-    Route::put('/planos/{url}', 'PlanController@update')->name('plans.update');
-    Route::delete('/planos/{url}', 'PlanController@destroy')->name('plans.destroy');
+    Route::post('/plano/cadastro', 'PlanController@store')->name('plans.store');
+    Route::put('/plano/{url}', 'PlanController@update')->name('plans.update');
+    Route::delete('/plano/{url}', 'PlanController@destroy')->name('plans.destroy');
 
     /** routes details plans */
-    Route::any('/planos/{url}/detalhes/search', 'DetailPlanController@search')->name('plans.details.search');
+    Route::any('/planos/{url}/detalhes/busca', 'DetailPlanController@search')->name('plans.details.search');
 
-    Route::get('/planos/{url}/detalhes/create', 'DetailPlanController@create')->name('details.plan.create');
+    Route::get('/plano/{url}/detalhes/cadastro', 'DetailPlanController@create')->name('details.plan.create');
     Route::get('/planos/{url}/detalhes', 'DetailPlanController@index')->name('details.plan.index');
-    Route::get('/planos/{url}/detalhes/{idDetalhe}/edit', 'DetailPlanController@edit')->name('details.plan.edit');
+    Route::get('/plano/{url}/detalhes/{idDetalhe}/edicao', 'DetailPlanController@edit')->name('details.plan.edit');
    
-    Route::post('/planos/{url}/detalhes', 'DetailPlanController@store')->name('details.plan.store');       
-    Route::put('/planos/{url}/detalhes/{idDetalhe}', 'DetailPlanController@update')->name('details.plan.update'); 
-    Route::delete('/planos/{url}/detalhes/{idDetalhe}', 'DetailPlanController@destroy')->name('details.plan.destroy');
+    Route::post('/plano/{url}/detalhes', 'DetailPlanController@store')->name('details.plan.store');       
+    Route::put('/plano/{url}/detalhes/{idDetalhe}', 'DetailPlanController@update')->name('details.plan.update'); 
+    Route::delete('/plano/{url}/detalhes/{idDetalhe}', 'DetailPlanController@destroy')->name('details.plan.destroy');
     
     /** routes profiles */
-    Route::any('/perfis/search', 'ACL\ProfileController@search')->name('profiles.search');
+    Route::any('/perfis/busca', 'ACL\ProfileController@search')->name('profiles.search');
 
     Route::get('/perfis','ACL\ProfileController@index')->name('profiles.index');
-    Route::get('/perfis/create', 'ACL\ProfileController@create')->name('profiles.create');
-    Route::get('/perfis/{id}', 'ACL\ProfileController@show')->name('profiles.show');
-    Route::get('/perfis/{id}/edit', 'ACL\ProfileController@edit')->name('profiles.edit');
+    Route::get('/perfil/cadastro', 'ACL\ProfileController@create')->name('profiles.create');
+    Route::get('/perfil/{id}', 'ACL\ProfileController@show')->name('profiles.show');
+    Route::get('/perfil/{id}/edicao', 'ACL\ProfileController@edit')->name('profiles.edit');
 
-    Route::post('/perfis/create', 'ACL\ProfileController@store')->name('profiles.store');
-    Route::put('/perfis/{id}', 'ACL\ProfileController@update')->name('profiles.update');
-    Route::delete('/perfis/{id}', 'ACL\ProfileController@destroy')->name('profiles.destroy');
+    Route::post('/perfil/cadastro', 'ACL\ProfileController@store')->name('profiles.store');
+    Route::put('/perfil/{id}', 'ACL\ProfileController@update')->name('profiles.update');
+    Route::delete('/perfil/{id}', 'ACL\ProfileController@destroy')->name('profiles.destroy');
 
     /** routes permissions */
-    Route::any('/permissoes/search', 'ACL\PermissionController@search')->name('permissions.search');
+    Route::any('/permissoes/busca', 'ACL\PermissionController@search')->name('permissions.search');
 
     Route::get('/permissoes', 'ACL\PermissionController@index')->name('permissions.index');
-    Route::get('/permissoes/create', 'ACL\PermissionController@create')->name('permissions.create');
-    Route::get('/permissoes/{id}', 'ACL\PermissionController@show')->name('permissions.show');
-    Route::get('/permissoes/{id}/edit', 'ACL\PermissionController@edit')->name('permissions.edit');
+    Route::get('/permissao/cadastro', 'ACL\PermissionController@create')->name('permissions.create');
+    Route::get('/permissao/{id}', 'ACL\PermissionController@show')->name('permissions.show');
+    Route::get('/permissao/{id}/edicao', 'ACL\PermissionController@edit')->name('permissions.edit');
 
-    Route::post('/permissoes/create', 'ACL\PermissionController@store')->name('permissions.store');
-    Route::put('/permissoes/{id}', 'ACL\PermissionController@update')->name('permissions.update');
-    Route::delete('/permissoes/{id}', 'ACL\PermissionController@destroy')->name('permissions.destroy');
+    Route::post('/permissao/cadastro', 'ACL\PermissionController@store')->name('permissions.store');
+    Route::put('/permissao/{id}', 'ACL\PermissionController@update')->name('permissions.update');
+    Route::delete('/permissao/{id}', 'ACL\PermissionController@destroy')->name('permissions.destroy');
 
     /** routes profiles X permissions */
-    Route::any('/perfis/{id}/permissoes-disponiveis/busca', 'ACL\PermissionProfileController@filterPermissionsAvailable')->name('profiles.permissions.available.search');
-    Route::any('/perfis/{id}/permissoes-vinculadas/busca', 'ACL\PermissionProfileController@filterPermissionsLinked')->name('profiles.permissions.search');
+    Route::any('/perfil/{id}/permissoes-disponiveis/busca', 'ACL\PermissionProfileController@filterPermissionsAvailable')->name('profiles.permissions.available.search');
+    Route::any('/perfil/{id}/permissoes-vinculadas/busca', 'ACL\PermissionProfileController@filterPermissionsLinked')->name('profiles.permissions.search');
     
     Route::get('/perfil/{id}/permissao/{idPermissao}/desvincular', 'ACL\PermissionProfileController@detachPermissionsProfile')->name('profiles.permissions.detach');
-    Route::get('/perfis/{id}/permissoes/vincular', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
-    Route::get('/perfis/{id}/permissoes', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
+    Route::get('/perfil/{id}/permissoes/vincular', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
+    Route::get('/perfil/{id}/permissoes', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
 
-    Route::post('/perfis/{id}/permissoes/vincular', 'ACL\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
+    Route::post('/perfil/{id}/permissoes/vincular', 'ACL\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
    
 });
 

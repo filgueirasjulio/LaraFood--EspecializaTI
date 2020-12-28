@@ -24,7 +24,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = $this->repository->paginate(10);
+        $permissions = $this->repository->latest()->paginate();
 
         return view('admin.pages.permissions.index', compact('permissions'));
     }
@@ -99,7 +99,7 @@ class PermissionController extends Controller
        $permission->update($request->all());
 
        return redirect()
-       ->route('profiles.index')
+       ->route('permissions.index')
        ->with('message', 'Permissão editada com sucesso!');
     }
 
