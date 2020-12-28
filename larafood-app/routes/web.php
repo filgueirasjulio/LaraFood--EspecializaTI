@@ -52,11 +52,12 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     /** routes profiles X permissions */
     Route::any('/perfil/{id}/permissoes-disponiveis/busca', 'ACL\PermissionProfileController@filterPermissionsAvailable')->name('profiles.permissions.available.search');
     Route::any('/perfil/{id}/permissoes-vinculadas/busca', 'ACL\PermissionProfileController@filterPermissionsLinked')->name('profiles.permissions.search');
-    
+    Route::any('/permissao/{id}/perfis-vinculados/busca', 'ACL\PermissionProfileController@filterProfilesLinked')->name('permissions.profiles.search');
+
     Route::get('/perfil/{id}/permissao/{idPermissao}/desvincular', 'ACL\PermissionProfileController@detachPermissionsProfile')->name('profiles.permissions.detach');
     Route::get('/perfil/{id}/permissoes/vincular', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
     Route::get('/perfil/{id}/permissoes', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
-    Route::get('/permissao/{idPermissao}/perfis', 'ACL\PermissionProfileController@profiles')->name('permissions.profiles');
+    Route::get('/permissao/{id}/perfis', 'ACL\PermissionProfileController@profiles')->name('permissions.profiles');
 
     Route::post('/perfil/{id}/permissoes/vincular', 'ACL\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
    

@@ -13,7 +13,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{ route('permissions.search') }}" method="POST" class="form form-inline">
+            <form action="{{ route('permissions.profiles.search', $permission->id) }}" method="POST" class="form form-inline">
                 @csrf
                 <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
                 <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
@@ -42,7 +42,7 @@
                 @else
                     <tbody>
                         <tr>
-                            <td style="font-size:18px">Esta permissão não está vinculada a nenhum perfil!</td>
+                            <td style="font-size:18px">Nenhum perfil encontrado!</td>
                         </tr>
                     </tbody>
                 @endif

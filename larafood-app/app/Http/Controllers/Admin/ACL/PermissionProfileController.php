@@ -115,4 +115,16 @@ class PermissionProfileController extends Controller
 
         return view('admin.pages.profiles.permissions.permissions', compact('profile', 'filter', 'permissions'));
     }
+
+    public function filterProfilesLinked(Request $request, $idPermission)
+    {
+        if(!$permission = $this->permission->find($idPermission)) {
+            return redirect()->back();
+        }
+
+        $filter = $request->except('_token');  
+        $profiles = $permission->profilesLinked($request->filter);
+
+        return view('admin.pages.permissions.profiles.profiles', compact('profiles', 'filter', 'permission'));
+    }
 }
