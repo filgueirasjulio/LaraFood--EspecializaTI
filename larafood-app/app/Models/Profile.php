@@ -45,6 +45,9 @@ class Profile extends Model
         return $permissions;
     }
 
+    /**
+     * permissions linked with this profile
+     */
     public function permissionsLinked($filter = null) 
     {
         $permissions = Permission::whereIn('permissions.id', function($query){

@@ -29,6 +29,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,10 @@
                             <tr>
                                 <td>
                                     {{ $permission->name }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('profiles.permissions.detach', [$profile->id, $permission->id]) }}" class="btn btn-info" alt="Desvincular"
+                                        title="Ver">Desvincular<a>
                                 </td>
                             </tr>
                         @endforeach

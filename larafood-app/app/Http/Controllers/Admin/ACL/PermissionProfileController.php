@@ -55,13 +55,29 @@ class PermissionProfileController extends Controller
 
         if(count($request->permissions) == 1) {
             return redirect()
-            ->route('profiles.permissions', $profile->id)
-            ->with('message', 'Permissão vinculada com sucesso!');
+                ->route('profiles.permissions', $profile->id)
+                ->with('message', 'Permissão vinculada com sucesso!');
         } else {
             return redirect()
-            ->route('profiles.permissions', $profile->id)
-            ->with('message', 'Permissões vinculadas com sucesso!');
+                ->route('profiles.permissions', $profile->id)
+                ->with('message', 'Permissões vinculadas com sucesso!');
         }
+    }
+
+    public function detachPermissionsProfile($idProfile, $idPermission)
+    {
+        $profile = $this->profile->find($idProfile);
+        $permission = $this->permission->find($idPermission);
+
+        if(!$profile || !$permission) {
+            return redirect()->back();
+        }
+
+        $profile->permissions()->detach($permission);
+
+        return redirect()
+            ->route('profiles.permissions', $profile->id)
+            ->with('message', 'Permissão desvinculada com sucesso!');
     }
 
     public function filterPermissionsAvailable(Request $request, $idProfile)
@@ -76,7 +92,7 @@ class PermissionProfileController extends Controller
         return view('admin.pages.profiles.permissions.available', compact('profile', 'filter', 'permissions'));
     }
 
-    public function filterAllPermissions(Request $request, $idProfile)
+    public function filterPermissionsLinked(Request $request, $idProfile)
     {
         if(!$profile = $this->profile->find($idProfile)) {
             return redirect()->back();
