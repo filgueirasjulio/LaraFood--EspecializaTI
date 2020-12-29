@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Plan;
 use App\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\SearchNameDescriptionTrait;
@@ -19,12 +20,14 @@ class Profile extends Model
         return $results;
     }
 
-    /**
-     * Get Permissions
-     */
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);
+    }
+
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class);
     }
 
     /**
@@ -42,9 +45,32 @@ class Profile extends Model
                     $queryFilter->where('permissions.name', 'LIKE', "%{$filter}%");
                }
             })
+            ->latest()
             ->paginate();
 
         return $permissions;
+    }
+
+    /**
+     * plans not linked with this profile
+     */
+    public function plansAvailable($filter = null)
+    {
+        $plans = Plan::whereNotIn('plans.id', function($query){
+            $query->select('plan_profile.plan_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.profile_id={$this->id}");
+        })
+            ->where(function($queryFilter) use ($filter) {
+               if($filter) {
+                    $queryFilter->where('plans.name', 'LIKE', "%{$filter}%");
+               }
+            })
+            ->latest()
+            ->paginate();
+
+        return $plans
+        ;
     }
 
     /**
@@ -62,8 +88,30 @@ class Profile extends Model
                     $queryFilter->where('permissions.name', 'LIKE', "%{$filter}%");
                }
             })
+            ->latest()
             ->paginate();
 
         return $permissions;
+    }
+
+    /**
+     * permissions linked with this profile
+     */
+    public function plansLinked($filter = null) 
+    {
+        $plans = Plan::whereIn('plans.id', function($query){
+            $query->select('plan_profile.plan_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.profile_id={$this->id}");
+        })
+            ->where(function($queryFilter) use ($filter) {
+               if($filter) {
+                    $queryFilter->where('plans.name', 'LIKE', "%{$filter}%");
+               }
+            })
+            ->latest()
+            ->paginate();
+
+        return $plans;
     }
 }

@@ -3,10 +3,14 @@
 @section('title', 'Planos')
 
 @section('content_header')
-    <div class="container">
+    <div class="d-flex flex-row-reverse">
+        <a href="{{route('profiles.index')}}" class="btn btn-sm btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>
+    </div>
+    
+    <div class="container" style="margin-top:15px;">
         <div class="row justify-content-between">
-            <h1>Planos</h1> <a href="{{ route('plans.create') }}" class="btn btn-sm btn-dark"><strong
-                    style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> Plano</a>
+            <h1>Planos de {{$profile->name}} </h1> <a href="{{ route('profiles.plans.available', $profile->id) }}" class="btn btn-dark"><strong
+                    style="font-size:15px;padding-right:5px;"><i class="fas fa-plus"></i></strong> Plano</a>
         </div>
     </div>
 @stop
@@ -15,20 +19,21 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex">
-                <form action="{{ route('plans.search') }}" method="POST" class="d-flex">
+                <form action="{{ route('profiles.plans.search', $profile->id) }}" method="POST"  class="d-flex">
                     @csrf
                     <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
                     <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-search"></i></button>
                 </form>
                 @if($filter && $filter != '')
                     <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
-                        <a href="{{route('plans.index')}}"><i class="fas fa-sync-alt" style="padding-left:5px;"></i></a>
+                        <a href="{{route('profiles.plans', $profile->id)}}"><i class="fas fa-sync-alt" style="padding-left:5px;"></i></a>
                     </strong> 
+                    <hr>
                 @endif
             </div>
         </div>
-        <div class="card-body table-responsive p-0">
-
+        <div class="card-body table-responsive">
+        
             @include('admin.includes.alerts')
 
             <table class="table table-condensed">
@@ -36,9 +41,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Preço</th>
-                            <th>Descrição</th>
-                            <th style="width:180px;">Ações</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,20 +51,8 @@
                                     {{ $plan->name }}
                                 </td>
                                 <td>
-                                    R$ {{ number_format($plan->price, 2, ',', '.') }}
-                                </td>
-                                <td>
-                                    {{ $plan->description }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-sm btn-info" alt="Ver"
-                                        title="Ver"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-sm btn-warning" alt="Editar"
-                                        title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-sm btn-secondary"
-                                        alt="Detalhes" title="Detalhes"><i class="fas fa-asterisk"></i></a>
-                                    <a href="{{ route('plans.profiles', $plan->id) }}" class="btn btn-sm"  style="background-color: #b2ff59;"
-                                        alt="Detalhes" title="Perfis"><i class="fas fa-users"></i></a>
+                                    <a href="{{ route('profiles.plans.detach', [$profile->id, $plan->id]) }}" class="btn btn-info" alt="Desvincular"
+                                        title="Ver">Desvincular<a>
                                 </td>
                             </tr>
                         @endforeach

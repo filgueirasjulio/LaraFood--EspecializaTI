@@ -42,6 +42,7 @@ class Permission extends Model
                     $queryFilter->where('profiles.name', 'LIKE', "%{$filter}%");
                }
             })
+            ->latest()
             ->paginate();
 
         return $permissions;

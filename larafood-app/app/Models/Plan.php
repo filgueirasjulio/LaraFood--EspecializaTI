@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Profile;
 use App\Models\DetailPlan;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\SearchNameDescriptionTrait;
@@ -22,5 +23,31 @@ class Plan extends Model
         $results = $this->SearchNameDescription($filter);
         
         return $results;
+    }
+
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
+
+    /**
+     * profiles linked with this plan
+     */
+    public function profilesLinked($filter = null) 
+    {
+        $plans = Profile::whereIn('profiles.id', function($query){
+            $query->select('plan_profile.profile_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.plan_id={$this->id}");
+        })
+            ->where(function($queryFilter) use ($filter) {
+               if($filter) {
+                    $queryFilter->where('profiles.name', 'LIKE', "%{$filter}%");
+               }
+            })
+            ->latest()
+            ->paginate();
+
+        return $plans;
     }
 }

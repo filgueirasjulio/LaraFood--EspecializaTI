@@ -61,6 +61,17 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
 
     Route::post('/perfil/{id}/permissoes/vincular', 'ACL\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
    
+    /** routes profiles x plans */
+    Route::any('/perfil/{id}/planos-disponiveis/busca', 'ACL\PlanProfileController@filterPlansAvailable')->name('profiles.plans.available.search');
+    Route::any('/perfil/{id}/planos-vinculadas/busca', 'ACL\PlanProfileController@filterPlansLinked')->name('profiles.plans.search');
+    Route::any('/plano/{id}/perfis-vinculados/busca', 'ACL\PlanProfileController@filterProfilesLinked')->name('plans.profiles.search');
+
+    Route::get('/perfil/{id}/planos', 'ACL\PlanProfileController@plans')->name('profiles.plans');
+    Route::get('/perfil/{id}/planos/vincular', 'ACL\PlanProfileController@plansAvailable')->name('profiles.plans.available');
+    Route::get('/perfil/{id}/plano/{idPlano}/desvincular', 'ACL\PlanProfileController@detachPlansProfile')->name('profiles.plans.detach');
+    Route::get('/plano/{id}/perfis', 'ACL\PlanProfileController@profiles')->name('plans.profiles');
+
+    Route::post('/perfil/{id}/planos/vincular', 'ACL\PlanProfileController@attachPlansProfile')->name('profiles.plans.attach');
 });
 
 /** home dashboard */
