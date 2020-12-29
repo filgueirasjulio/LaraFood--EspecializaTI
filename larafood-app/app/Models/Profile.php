@@ -4,16 +4,18 @@ namespace App\Models;
 
 use App\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\SearchNameDescriptionTrait;
 
 class Profile extends Model
 {
+    use SearchNameDescriptionTrait;
+    
     protected $fillable = ['name', 'description'];
 
     public function search($filter = null)
     {
-        $results = $this->where('name', 'LIKE', "%{$filter}%")
-                        ->orWhere('description', 'LIKE', "%{$filter}%")
-                        ->paginate();
+        $results = $this->SearchNameDescription($filter);
+        
         return $results;
     }
 
