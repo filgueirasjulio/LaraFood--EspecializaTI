@@ -5,8 +5,8 @@
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Plano</h1> <a href="{{ route('plans.create') }}" class="btn btn-sm btn-dark"><strong
-                    style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> plano</a>
+            <h1>Planos</h1> <a href="{{ route('plans.create') }}" class="btn btn-sm btn-dark"><strong
+                    style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> Plano</a>
         </div>
     </div>
 @stop
@@ -18,7 +18,7 @@
                 <form action="{{ route('plans.search') }}" method="POST" class="d-flex">
                     @csrf
                     <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
-                    <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                    <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-search"></i></button>
                 </form>
                 @if($filter && $filter != '')
                     <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 

@@ -9,8 +9,8 @@
     
     <div class="container" style="margin-top:15px;">
         <div class="row justify-content-between">
-            <h1>Permissões do perfil {{$profile->name}} </h1> <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark"><strong
-                    style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> permissão</a>
+            <h1>Permissões de {{$profile->name}} </h1> <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark"><strong
+                    style="font-size:15px;padding-right:5px;"><i class="fas fa-plus"></i></strong> Permissão</a>
         </div>
     </div>
 @stop
@@ -22,7 +22,7 @@
                 <form action="{{ route('profiles.permissions.search', $profile->id) }}" method="POST"  class="d-flex">
                     @csrf
                     <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
-                    <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                    <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-search"></i></button>
                 </form>
                 @if($filter && $filter != '')
                     <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 

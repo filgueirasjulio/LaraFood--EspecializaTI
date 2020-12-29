@@ -5,8 +5,8 @@
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Perfil</h1> <a href="{{ route('profiles.create') }}" class="btn btn-sm btn-dark"><strong
-                style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> perfil</a>
+            <h1>Perfis</h1> <a href="{{ route('profiles.create') }}" class="btn btn-sm btn-dark"><strong
+                style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> Perfil</a>
         </div>
     </div>
 @stop
@@ -18,7 +18,7 @@
                 <form action="{{ route('profiles.search') }}" method="POST" class="d-flex">
                     @csrf
                     <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
-                    <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                    <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-search"></i></button>
                 </form>
                 @if($filter && $filter != '')
                 <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
@@ -50,11 +50,11 @@
                                     {{ $profile->description }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-info" alt="Ver"
+                                    <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-sm btn-info" alt="Ver"
                                         title="Ver"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-warning" alt="Editar"
+                                    <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-sm btn-warning" alt="Editar"
                                         title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-dark" alt="Editar"
+                                    <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-sm btn-dark" alt="Editar"
                                         title="Permissions"><i class="fas fa-key"></i></a>
                                 </td>
                             </tr>

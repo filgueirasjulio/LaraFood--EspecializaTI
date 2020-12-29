@@ -22,7 +22,7 @@
                 <form action="{{ route('plans.details.search', $plan->url) }}" method="POST" class="d-flex">
                     @csrf
                     <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
-                    <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                    <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-search"></i></button>
                 </form>
                 @if($filter && $filter != '')
                 <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
@@ -41,7 +41,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th width="115" class="text-center">Ações</th>
+                            <th width="115">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,15 +50,15 @@
                                 <td>
                                     {{ $detail->name }}
                                 </td>
-                                <td class="d-flex justify-content-between">
+                                <td class="d-flex">
                                     <a href="{{ route('details.plan.edit', [$plan->url, $detail->id]) }}"
-                                        class="btn btn-warning" alt="Editar" title="Editar"><i
+                                        class="btn btn-sm btn-warning" alt="Editar" title="Editar" style="margin-right: 3px;"><i
                                             class="fas fa-pencil-alt"></i></a>
                                     <form action="{{ route('details.plan.destroy', [$plan->url, $detail->id]) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" alt="Remover" title="Remover">
+                                        <button type="submit" class="btn btn-sm btn-danger" alt="Remover" title="Remover">
                                             <strong style="font-size:16px;padding-right:5px;"><i
                                                     class="fas fa-trash-alt"></i></strong>
                                         </button>

@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="container">
         <div class="row justify-content-between">
-            <h1>Perfis - {{$permission->name}} </h1> <a href="{{route('permissions.index')}}" class="btn btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>  
+            <h1>Perfis - {{$permission->name}} </h1> <a href="{{route('permissions.index')}}" class="btn btn-sm btn-dark"><strong style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></strong></a>  
         </div>
     </div>
 @stop
@@ -17,7 +17,7 @@
                 <form action="{{ route('permissions.profiles.search', $permission->id) }}" method="POST" class="d-flex">
                     @csrf
                     <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
-                    <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                    <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-search"></i></button>
                 </form>
                 @if($filter && $filter != '')
                     <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
