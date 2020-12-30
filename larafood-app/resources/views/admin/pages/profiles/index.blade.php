@@ -50,7 +50,7 @@
                                         title="Ver"><i class="fas fa-eye"></i></a>
                                     <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-sm btn-warning" alt="Editar"
                                         title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-sm btn-dark" alt="Permissões"
+                                    <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-sm btn-secondary" alt="Permissões"
                                         title="Permissões"><i class="fas fa-key"></i></a>
                                     <a href="{{ route('profiles.plans', $profile->id) }}" class="btn btn-sm" style="background-color: #b2ff59;" alt="Planos"
                                         title="Planos"><i class="fas fa-clipboard-list"></i></a>

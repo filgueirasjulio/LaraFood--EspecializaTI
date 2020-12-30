@@ -1,6 +1,9 @@
 <?php
 
-Route::prefix('admin')->namespace('Admin')->group(function() {
+Route::prefix('admin')
+       ->namespace('Admin')
+       ->middleware('auth')
+       ->group(function() {
 
     /** routes plans */
     Route::any('/planos/busca', 'PlanController@search')->name('plans.search');
@@ -75,6 +78,10 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
 });
 
 /** home dashboard */
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Site\SiteController@index')->name('site.home');
+
+/**
+ * auth routes
+ */
+Auth::routes();
+

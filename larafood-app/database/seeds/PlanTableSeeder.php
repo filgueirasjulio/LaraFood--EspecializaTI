@@ -13,7 +13,7 @@ class PlanTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Plan::class, 30)->create()->each(function($p) {
+        factory(Plan::class, 3)->create()->each(function($p) {
             $p->details()->saveMany(factory(DetailPlan::class, 3)->make());
           });
     }

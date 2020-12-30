@@ -54,7 +54,7 @@
                                         title="Ver"><i class="fas fa-eye"></i></a>
                                     <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-sm btn-warning" alt="Editar"
                                         title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-sm btn-dark" alt="Perfis"
+                                    <a href="{{ route('permissions.profiles', $permission->id) }}" class="btn btn-sm btn-secondary" alt="Perfis"
                                         title="Perfis"><i class="fas fa-users"></i></a>
                                 </td>
                             </tr>
