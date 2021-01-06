@@ -4,7 +4,7 @@ a:hover {
 .title-plan {
     font-family: 'Lato', sans-serif;
     text-align: center;
-    font-size: 4em;
+    font-size: 3em;
     color: #B63132;
     margin: 26px 0;
 }
@@ -21,8 +21,8 @@ a:hover {
 }
 .pricingTable .title{
     color: #B63132;
-    font-size: 27px;
-    font-weight: 800;
+    font-size: 24px;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 0 0 15px;
@@ -58,7 +58,7 @@ a:hover {
     z-index: -1;
 }
 .pricingTable .price-value .amount{
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 800;
     line-height: 50px;
     display: inline-block;
@@ -76,6 +76,7 @@ a:hover {
     letter-spacing: 1px;
     line-height: 20px;
     text-transform: uppercase;
+    padding-top: 5px;
     display: block;
 }
 .pricingTable .pricing-content ul{
@@ -111,7 +112,7 @@ a:hover {
 }
 .pricingTable .pricingTable-signup a{
     color: #fff;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 800;
     text-transform: uppercase;
     padding: 7px 25px;

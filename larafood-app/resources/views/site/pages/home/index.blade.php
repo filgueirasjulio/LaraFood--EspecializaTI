@@ -4,12 +4,12 @@
     <div class="text-center">
         <h1 class="title-plan">Escolha o plano</h1>
     </div>
-    <div class="row">
+    <div class="row" style="padding-bottom:40px">
         @foreach ($plans as $plan)
             <div class="col-md-4 col-sm-6">
                 <div class="pricingTable">
                     <div class="pricing-content">
-                        <div class="pricingTable-header">
+                        <div class="pricingTable-header" style="white-space: nowrap;">
                             <h3 class="title">{{ $plan->name }}</h3>
                         </div>
                         <div class="inner-content">
