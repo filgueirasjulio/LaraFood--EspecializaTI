@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Plan;
+use App\Models\Companie;
 use App\Models\DetailPlan;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +15,8 @@ class PlanTableSeeder extends Seeder
     public function run()
     {
         factory(Plan::class, 3)->create()->each(function($p) {
-            $p->details()->saveMany(factory(DetailPlan::class, 3)->make());
+            $p->details()->saveMany(factory(DetailPlan::class, 6)->make());
+            $p->companies()->saveMany(factory(Companie::class, 4)->make());
           });
     }
 }

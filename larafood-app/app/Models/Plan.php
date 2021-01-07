@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Profile;
+use App\Models\Companie;
 use App\Models\DetailPlan;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\SearchNameDescriptionTrait;
@@ -28,6 +29,12 @@ class Plan extends Model
     public function profiles()
     {
         return $this->belongsToMany(Profile::class);
+    }
+
+    
+    public function companies()
+    {
+        return $this->hasMany(Companie::class);
     }
 
     /**
