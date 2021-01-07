@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -50,9 +51,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+           /* 'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cnpj'  => ['required', 'unique:companies'],
+            'companie'  => ['required', 'unique:companies']*/
         ]);
     }
 
@@ -64,10 +67,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+      if(!$plan = session('plan')) {
+          return redirect()->route('site.home');
+      }
+
+      $companie = $plan->companies()->create([
+        'cnpj'=> $data['cnpj'],
+        'name' => $data['companie'],
+        'url' => Str::kebab($data['companie']),
+        'email' => $data['email'],
+        'subscription' => now(),
+        'expires_at' => now()->addDays(7)
+      ]);
+
+     $user = $companie->users()->create([
+        'name' =>   $data['name'],
+        'email' =>  $data['email'],
+        'password' => bcrypt($data['password'])
+      ]);
+
+      return $user;
     }
 }

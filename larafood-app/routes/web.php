@@ -75,9 +75,13 @@ Route::prefix('admin')
     Route::get('/plano/{id}/perfis', 'ACL\PlanProfileController@profiles')->name('plans.profiles');
 
     Route::post('/perfil/{id}/planos/vincular', 'ACL\PlanProfileController@attachPlansProfile')->name('profiles.plans.attach');
+
+    /** Home */
+    Route::get('/', 'PlanController@index')->name('admin.index');
 });
 
-/** home dashboard */
+/** Site */
+Route::get('/plano/{url}', 'Site\SiteController@plan')->name('plan.subscription');
 Route::get('/', 'Site\SiteController@index')->name('site.home');
 
 /**

@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Plan::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->firstName,
 	    'description' => $faker->sentence,
         'price' => $faker->randomDigit,
     ];
