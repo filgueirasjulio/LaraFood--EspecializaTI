@@ -15,6 +15,7 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid');
             $table->unsignedBigInteger('plan_id');
             $table->string('cnpj')->unique();
             $table->string('name')->unique();

@@ -39,7 +39,6 @@ class CompanieService
         return $this->plan->companies()->create([
             'cnpj'=> $data['cnpj'],
             'name' => $data['companie'],
-            'url' => Str::kebab($data['companie']),
             'email' => $data['email'],
             'subscription' => now(),
             'expires_at' => now()->addDays(7)
