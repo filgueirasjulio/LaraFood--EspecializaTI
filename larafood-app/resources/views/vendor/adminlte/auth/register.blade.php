@@ -16,7 +16,7 @@
                         @section('auth_body')
                             <form action="{{ route('register') }}" method="post">
                                 {{ csrf_field() }}
-                                @if (session('plan')->name)
+                                @if(isset(session('plan')->name))
                                     <p class="text-center" style="background-color: #e3f2fd; padding:5px; border-radius:10px;">
                                         <strong style="margin-right: 8px;">Plano</strong>{{ session('plan')->name }}
                                     </p>

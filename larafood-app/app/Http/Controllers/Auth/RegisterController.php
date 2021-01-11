@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/planos';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -51,11 +51,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-           /* 'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cnpj'  => ['required', 'unique:companies'],
-            'companie'  => ['required', 'unique:companies']*/
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'email' => ['required', 'string', 'email', 'min:3', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'max:16', 'confirmed'],
+            'companie'  => ['required', 'string', 'min:3', 'max:255', 'unique:companies,name'],
+            'cnpj'  => ['required', 'numeric', 'digits:14', 'unique:companies'],
         ]);
     }
 
