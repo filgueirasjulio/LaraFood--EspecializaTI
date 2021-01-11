@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Illuminate\Support\Str;
+use App\Services\CompanieService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -71,21 +71,9 @@ class RegisterController extends Controller
           return redirect()->route('site.home');
       }
 
-      $companie = $plan->companies()->create([
-        'cnpj'=> $data['cnpj'],
-        'name' => $data['companie'],
-        'url' => Str::kebab($data['companie']),
-        'email' => $data['email'],
-        'subscription' => now(),
-        'expires_at' => now()->addDays(7)
-      ]);
+      $companieService = app(CompanieService::class);
 
-     $user = $companie->users()->create([
-        'name' =>   $data['name'],
-        'email' =>  $data['email'],
-        'password' => bcrypt($data['password'])
-      ]);
-
+      $user = $companieService->make($plan, $data);
       return $user;
     }
 }
