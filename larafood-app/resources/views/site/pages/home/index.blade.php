@@ -4,6 +4,9 @@
     <div class="text-center">
         <h1 class="title-plan">Escolha o plano</h1>
     </div>
+    <div class="container">
+        @include('admin.includes.alerts')
+    </div>
     <div class="row" style="padding-bottom:40px">
         @foreach ($plans as $plan)
             <div class="col-md-4 col-sm-6">

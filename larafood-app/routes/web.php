@@ -89,3 +89,5 @@ Route::get('/', 'Site\SiteController@index')->name('site.home');
  */
 Auth::routes();
 
+
+

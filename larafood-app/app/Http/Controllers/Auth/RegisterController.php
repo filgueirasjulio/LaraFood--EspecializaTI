@@ -39,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('check.if.session.has.plan');
     }
 
     /**
@@ -59,6 +59,11 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -67,9 +72,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-      if(!$plan = session('plan')) {
-          return redirect()->route('site.home');
+
+      if(!session()->has('plan')) {
+          return redirect()
+                 ->route('site.home')
+                 ->with('warning', 'Selecione um plano antes de se registrar!');
       }
+
+      $plan = session('plan');
 
       $companieService = app(CompanieService::class);
 
