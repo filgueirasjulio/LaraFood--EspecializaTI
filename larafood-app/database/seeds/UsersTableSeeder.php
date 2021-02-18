@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Companie;
+use App\Models\Company;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -12,9 +12,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-            $companie = Companie::first();
+            $company = Company::first();
 
-            $companie->users()->create(
+            $company->users()->create(
         	[
 		        'name' => 'Administrator',
 		        'email' => 'admin@admin.com',

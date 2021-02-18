@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Profile;
-use App\Models\Companie;
+use App\Models\Company;
 use App\Models\DetailPlan;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\SearchNameDescriptionTrait;
@@ -34,7 +34,7 @@ class Plan extends Model
     
     public function companies()
     {
-        return $this->hasMany(Companie::class);
+        return $this->hasMany(Company::class);
     }
 
     /**

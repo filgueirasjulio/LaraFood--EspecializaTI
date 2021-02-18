@@ -3,9 +3,8 @@
 namespace App\Services;
 
 use App\Models\Plan;
-use Illuminate\Support\Str;
 
-class CompanieService
+class CompanyService
 {    
     private $plan, $data = [];
     
@@ -21,8 +20,8 @@ class CompanieService
         $this->plan = $plan;
         $this->data = $data;
 
-        $companie = $this->storeCompanie();
-        $user =  $this->storeUser($companie);
+        $company = $this->storeCompany();
+        $user =  $this->storeUser($company);
 
         return $user;
     }   
@@ -32,13 +31,13 @@ class CompanieService
      *
      * @return void
      */
-    public function storeCompanie()
+    public function storeCompany()
     {
         $data = $this->data;
         
         return $this->plan->companies()->create([
             'cnpj'=> $data['cnpj'],
-            'name' => $data['companie'],
+            'name' => $data['company'],
             'email' => $data['email'],
             'subscription' => now(),
             'expires_at' => now()->addDays(7)
@@ -48,14 +47,14 @@ class CompanieService
     /**
      * storeUser
      *
-     * @param  mixed $companie
+     * @param  mixed $company
      * @return void
      */
-    public function storeUser($companie)
+    public function storeUser($company)
     {
         $data = $this->data;
         
-        $user = $companie->users()->create([
+        $user = $company->users()->create([
             'name' =>   $data['name'],
             'email' =>  $data['email'],
             'password' => bcrypt($data['password'])

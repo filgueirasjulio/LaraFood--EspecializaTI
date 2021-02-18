@@ -21,18 +21,18 @@
                                         <strong style="margin-right: 8px;">Plano</strong>{{ session('plan')->name }}
                                     </p>
                                 @endif
-                                {{-- Companie field --}}
+                                {{-- Company field --}}
                                 <div class="input-group mb-3">
-                                    <input type="text" name="companie" class="form-control {{ $errors->has('companie') ? 'is-invalid' : '' }}"
-                                        value="{{ old('companie') }}" placeholder="Empresa" autofocus>
+                                    <input type="text" name="company" class="form-control {{ $errors->has('company') ? 'is-invalid' : '' }}"
+                                        value="{{ old('company') }}" placeholder="Empresa" autofocus>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
                                         </div>
                                     </div>
-                                    @if ($errors->has('companie'))
+                                    @if ($errors->has('company'))
                                         <div class="invalid-feedback">
-                                            <strong>{{ $errors->first('companie') }}</strong>
+                                            <strong>{{ $errors->first('company') }}</strong>
                                         </div>
                                     @endif
                                 </div>

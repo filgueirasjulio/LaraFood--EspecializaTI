@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateDetailPlan extends FormRequest
+class StoreUpdateUser extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreUpdateDetailPlan extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,7 +24,7 @@ class StoreUpdateDetailPlan extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:255'
+            //
         ];
     }
 }

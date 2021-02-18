@@ -2,32 +2,32 @@
 
 namespace App\Observers;
 
-use App\Models\Companie;
+use App\Models\Company;
 use Illuminate\Support\Str;
 
 class CompanieObserver
 {
     /**
-     * Handle the companie "creating" event.
+     * Handle the company "creating" event.
      *
-     * @param  \App\Models\Companie  $companie
+     * @param  \App\Models\Company  $company
      * @return void
      */
-    public function creating(Companie $companie)
+    public function creating(Company $company)
     {
-        $companie->uuid = Str::uuid();
-        $companie->url = Str::kebab($companie->name);
+        $company->uuid = Str::uuid();
+        $company->url = Str::kebab($company->name);
     }
 
     /**
-     * Handle the companie "updating" event.
+     * Handle the company "updating" event.
      *
-     * @param  \App\Models\Companie  $companie
+     * @param  \App\Models\Company  $company
      * @return void
      */
-    public function updating(Companie $companie)
+    public function updating(Company $company)
     {
-        $companie->uuid = Str::uuid();
-        $companie->url = Str::kebab($companie->name);
+        $company->uuid = Str::uuid();
+        $company->url = Str::kebab($company->name);
     }
 }
