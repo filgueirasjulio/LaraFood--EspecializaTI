@@ -9,18 +9,31 @@ use App\Traits\SearchNameDescriptionTrait;
 class Permission extends Model
 {
     use SearchNameDescriptionTrait;
-    
+        
+    /**
+     * fillable
+     *
+     * @var array
+     */
     protected $fillable = ['name', 'description'];
-
+    
+    /**
+     * search
+     *
+     * @param  mixed $filter
+     * @return void
+     */
     public function search($filter = null)
     {
         $results = $this->SearchNameDescription($filter);
         
         return $results;
     }
-
+    
     /**
-     * Get Profiles
+     * profiles
+     *
+     * @return void
      */
     public function profiles()
     {
@@ -29,6 +42,9 @@ class Permission extends Model
 
     /**
      * profiles linked with this permission
+     *
+     * @param  mixed $filter
+     * @return void
      */
     public function profilesLinked($filter = null) 
     {

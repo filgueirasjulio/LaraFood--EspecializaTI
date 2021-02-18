@@ -10,21 +10,42 @@ use App\Traits\SearchNameDescriptionTrait;
 class Profile extends Model
 {
     use SearchNameDescriptionTrait;
-    
+        
+    /**
+     * fillable
+     *
+     * @var array
+     */
     protected $fillable = ['name', 'description'];
-
+    
+    /**
+     * search
+     *
+     * @param  mixed $filter
+     * @return void
+     */
     public function search($filter = null)
     {
         $results = $this->SearchNameDescription($filter);
         
         return $results;
     }
-
+    
+    /**
+     * permissions
+     *
+     * @return void
+     */
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);
     }
-
+    
+    /**
+     * plans
+     *
+     * @return void
+     */
     public function plans()
     {
         return $this->belongsToMany(Plan::class);
@@ -32,6 +53,10 @@ class Profile extends Model
 
     /**
      * permissions not linked with this profile
+     *
+     * @param null $filter
+     * 
+     * @return void
      */
     public function permissionsAvailable($filter = null)
     {
@@ -53,6 +78,9 @@ class Profile extends Model
 
     /**
      * plans not linked with this profile
+     *
+     * @param  mixed $filter
+     * @return void
      */
     public function plansAvailable($filter = null)
     {
@@ -75,6 +103,9 @@ class Profile extends Model
 
     /**
      * permissions linked with this profile
+     *
+     * @param  mixed $filter
+     * @return void
      */
     public function permissionsLinked($filter = null) 
     {
@@ -96,6 +127,9 @@ class Profile extends Model
 
     /**
      * permissions linked with this profile
+     *
+     * @param  mixed $filter
+     * @return void
      */
     public function plansLinked($filter = null) 
     {

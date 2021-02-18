@@ -11,27 +11,52 @@ use App\Traits\SearchNameDescriptionTrait;
 class Plan extends Model
 {
     use SearchNameDescriptionTrait;
-
+    
+    /**
+     * fillable
+     *
+     * @var array
+     */
     protected $fillable = ['name', 'url', 'price', 'description'];
-
+    
+    /**
+     * details
+     *
+     * @return void
+     */
     public function details()
     {
         return $this->hasMany(DetailPlan::class);
     }
-
+    
+    /**
+     * search
+     *
+     * @param  mixed $filter
+     * @return void
+     */
     public function search($filter = null)
     {
         $results = $this->SearchNameDescription($filter);
         
         return $results;
     }
-
+    
+    /**
+     * profiles
+     *
+     * @return void
+     */
     public function profiles()
     {
         return $this->belongsToMany(Profile::class);
     }
-
     
+    /**
+     * companies
+     *
+     * @return void
+     */
     public function companies()
     {
         return $this->hasMany(Company::class);
@@ -39,6 +64,9 @@ class Plan extends Model
 
     /**
      * profiles linked with this plan
+     *
+     * @param  mixed $filter
+     * @return void
      */
     public function profilesLinked($filter = null) 
     {

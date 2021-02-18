@@ -11,13 +11,26 @@ use App\Http\Requests\StoreUpdateDetailPlan;
 class DetailPlanController extends Controller
 {
     private $repository, $plan;
-
+       
+    /**
+     * __construct
+     *
+     * @param  mixed $detailPlan
+     * @param  mixed $plan
+     * @return void
+     */
     public function __construct(DetailPlan $detailPlan, Plan $plan)
     {
         $this->repository = $detailPlan;
         $this->plan = $plan;
     }
-
+       
+    /**
+     * index
+     *
+     * @param  mixed $urlPlan
+     * @return void
+     */
     public function index($urlPlan)
     {
         if(!$plan = $this->plan->where('url', $urlPlan)->first()) {
@@ -29,7 +42,13 @@ class DetailPlanController extends Controller
 
         return view('admin.pages.plans.details.index', compact('plan', 'details', 'filter'));
     }
-
+     
+    /**
+     * create
+     *
+     * @param  mixed $urlPlan
+     * @return void
+     */
     public function create($urlPlan)
     {
         if(!$plan = $this->plan->where('url', $urlPlan)->first()) {
@@ -38,7 +57,14 @@ class DetailPlanController extends Controller
 
         return view('admin.pages.plans.details.create', compact('plan'));
     }
-
+    
+    /**
+     * store
+     *
+     * @param  mixed $request
+     * @param  mixed $urlPlan
+     * @return void
+     */
     public function store(StoreUpdateDetailPlan $request, $urlPlan)
     {
         if(!$plan = $this->plan->where('url', $urlPlan)->first()) {
@@ -51,7 +77,14 @@ class DetailPlanController extends Controller
                 ->route('details.plan.index', $plan->url)
                 ->with('message', 'Detalhe cadastrado com sucesso!');;
     }
-
+    
+    /**
+     * edit
+     *
+     * @param  mixed $urlPlan
+     * @param  mixed $idDetail
+     * @return void
+     */
     public function edit($urlPlan, $idDetail)
     {
         $plan = $this->plan->where('url', $urlPlan)->first();
@@ -62,7 +95,15 @@ class DetailPlanController extends Controller
 
         return view('admin.pages.plans.details.edit', compact('plan', 'detail'));
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $request
+     * @param  mixed $urlPlan
+     * @param  mixed $idDetail
+     * @return void
+     */
     public function update(StoreUpdateDetailPlan $request, $urlPlan, $idDetail)
     {
         $plan = $this->plan->where('url', $urlPlan)->first();
@@ -77,7 +118,14 @@ class DetailPlanController extends Controller
                 ->route('details.plan.index', $plan->url)
                 ->with('message', 'Detalhe editado com sucesso!');;
     }
-
+    
+    /**
+     * destroy
+     *
+     * @param  mixed $urlPlan
+     * @param  mixed $idDetail
+     * @return void
+     */
     public function destroy($urlPlan, $idDetail)
     {
         $plan = $this->plan->where('url', $urlPlan)->first();
@@ -92,7 +140,14 @@ class DetailPlanController extends Controller
                 ->route('details.plan.index', $plan->url)
                 ->with('message', 'Detalhe removido com sucesso!');;
     }
-
+    
+    /**
+     * search
+     *
+     * @param  mixed $request
+     * @param  mixed $urlPlan
+     * @return void
+     */
     public function search(Request $request, $urlPlan)
     {
         $filter = $request->except('_token');

@@ -11,13 +11,26 @@ class PlanProfileController extends Controller
 {
     
     private $plan, $profile;
-
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $plan
+     * @param  mixed $profile
+     * @return void
+     */
     public function __construct(Plan $plan, Profile $profile)
     {
         $this->plan = $plan;
         $this->profile = $profile;
     }
-
+    
+    /**
+     * plans
+     *
+     * @param  mixed $idProfile
+     * @return void
+     */
     public function plans($idProfile)
     {
         $profile = $this->profile->find($idProfile);
@@ -30,7 +43,13 @@ class PlanProfileController extends Controller
 
         return view('admin.pages.profiles.plans.plans', compact('profile', 'plans', 'filter'));
     }
-
+    
+    /**
+     * profiles
+     *
+     * @param  mixed $idPlan
+     * @return void
+     */
     public function profiles($idPlan)
     {
         $plan = $this->plan->find($idPlan);
@@ -43,7 +62,13 @@ class PlanProfileController extends Controller
 
         return view('admin.pages.plans.profiles.profiles', compact('plan', 'profiles', 'filter'));
     }
-
+    
+    /**
+     * plansAvailable
+     *
+     * @param  mixed $idProfile
+     * @return void
+     */
     public function plansAvailable($idProfile)
     {
         if(!$profile = $this->profile->find($idProfile)) {
@@ -55,7 +80,14 @@ class PlanProfileController extends Controller
 
         return view('admin.pages.profiles.plans.available', compact('profile', 'plans', 'filter'));
     }
-
+    
+    /**
+     * attachPlansProfile
+     *
+     * @param  mixed $request
+     * @param  mixed $idProfile
+     * @return void
+     */
     public function attachPlansProfile(Request $request, $idProfile)
     {
         if(!$profile = $this->profile->find($idProfile)) {
@@ -80,7 +112,14 @@ class PlanProfileController extends Controller
                 ->with('message', 'Planos vinculados com sucesso!');
         }
     }
-
+    
+    /**
+     * detachPlansProfile
+     *
+     * @param  mixed $idProfile
+     * @param  mixed $idPlan
+     * @return void
+     */
     public function detachPlansProfile($idProfile, $idPlan)
     {
         $profile = $this->profile->find($idProfile);
@@ -96,7 +135,14 @@ class PlanProfileController extends Controller
             ->route('profiles.plans', $profile->id)
             ->with('message', 'Plano desvinculado com sucesso!');
     }
-    
+        
+    /**
+     * filterPlansAvailable
+     *
+     * @param  mixed $request
+     * @param  mixed $idProfile
+     * @return void
+     */
     public function filterPlansAvailable(Request $request, $idProfile)
     {
         if(!$profile = $this->profile->find($idProfile)) {
@@ -108,7 +154,14 @@ class PlanProfileController extends Controller
 
         return view('admin.pages.profiles.plans.available', compact('profile', 'filter', 'plans'));
     }
-
+    
+    /**
+     * filterPlansLinked
+     *
+     * @param  mixed $request
+     * @param  mixed $idProfile
+     * @return void
+     */
     public function filterPlansLinked(Request $request, $idProfile)
     {
         if(!$profile = $this->profile->find($idProfile)) {
@@ -120,7 +173,14 @@ class PlanProfileController extends Controller
 
         return view('admin.pages.profiles.plans.plans', compact('profile', 'filter', 'plans'));
     }
-
+    
+    /**
+     * filterProfilesLinked
+     *
+     * @param  mixed $request
+     * @param  mixed $idPlan
+     * @return void
+     */
     public function filterProfilesLinked(Request $request, $idPlan)
     {
         if(!$plan = $this->plan->find($idPlan)) {

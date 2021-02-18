@@ -11,16 +11,22 @@ class ProfileController extends Controller
 {
     
     private $repository;
-
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $profile
+     * @return void
+     */
     public function __construct(Profile $profile)
     {
         $this->repository = $profile;
     }
-
+    
     /**
-     * Display a listing of the resource.
+     * index
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function index()
     {
@@ -29,12 +35,12 @@ class ProfileController extends Controller
 
         return view('admin.pages.profiles.index', compact('profiles', 'filter'));
     }
-
+    
     /**
-     * Display the specified resource.
+     * show
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  mixed $id
+     * @return void
      */
     public function show($id)
     {
@@ -45,22 +51,22 @@ class ProfileController extends Controller
 
         return view('admin.pages.profiles.show', ['profile' => $profile]);
     }
-
+    
     /**
-     * Show the form for creating a new resource.
+     * create
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
         return view('admin.pages.profiles.create');
     }
-
-     /**
-     * Store a newly created resource in storage.
+    
+    /**
+     * store
      *
-     * @param  \App\Http\Requests\StoreUpdateProfile  $request
-     * @return \Illuminate\Http\Response
+     * @param  mixed $request
+     * @return void
      */
     public function store(StoreUpdateProfile $request)
     {
@@ -70,12 +76,12 @@ class ProfileController extends Controller
                ->route('profiles.index')
                ->with('message', 'Perfil cadastrado com sucesso!');
     }
-
+    
     /**
-     * Show the form for editing the specified resource.
+     * edit
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  mixed $id
+     * @return void
      */
     public function edit($id)
     {
@@ -83,13 +89,13 @@ class ProfileController extends Controller
         
         return view('admin.pages.profiles.edit', compact('profile'));
     }
-
+    
     /**
-     * Update the specified resource in storage.
+     * update
      *
-     * @param  \App\Http\Requests\StoreUpdateProfile  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
      */
     public function update(StoreUpdateProfile $request, $id)
     {
@@ -102,12 +108,12 @@ class ProfileController extends Controller
        ->route('profiles.index')
        ->with('message', 'Perfil editado com sucesso!');
     }
-
+    
     /**
-     * Remove the specified resource from storage.
+     * destroy
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  mixed $id
+     * @return void
      */
     public function destroy($id)
     {
@@ -120,12 +126,12 @@ class ProfileController extends Controller
         ->route('profiles.index')
         ->with('message', 'Perfil deletado com sucesso!'); 
     }
-
+    
     /**
-     * Search results
+     * search
      *
-     * @param  Request $request
-     * @return \Illuminate\Http\Response
+     * @param  mixed $request
+     * @return void
      */
     public function search(Request $request)
     {

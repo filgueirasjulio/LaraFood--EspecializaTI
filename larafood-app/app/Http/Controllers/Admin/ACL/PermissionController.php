@@ -9,18 +9,24 @@ use App\Http\Requests\StoreUpdatePermission;
 
 class PermissionController extends Controller
 {
-      
-    private $repository;
 
+    private $repository;
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $permission
+     * @return void
+     */
     public function __construct(Permission $permission)
     {
         $this->repository = $permission;
     }
-
-       /**
-     * Display a listing of the resource.
+    
+    /**
+     * index
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function index()
     {
@@ -31,52 +37,50 @@ class PermissionController extends Controller
     }
     
     /**
-     * Display the specified resource.
+     * show
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  mixed $id
+     * @return void
      */
     public function show($id)
     {
         $permission = $this->repository->where('id', $id)->first();
-        if(!$permission)
+        if (!$permission)
             return redirect()->back();
 
         return view('admin.pages.permissions.show', compact('permission'));
     }
-
+    
     /**
-     * Show the form for creating a new resource.
+     * create
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
         return view('admin.pages.permissions.create');
     }
-
+    
     /**
-     * Store a newly created resource in storage.
+     * store
      *
-     * @param  \App\Http\Requests\StoreUpdateProfile  $request
-     * @return \Illuminate\Http\Response
+     * @param  mixed $request
+     * @return void
      */
-
-     public function store(StoreUpdatePermission $request)
-     {
+    public function store(StoreUpdatePermission $request)
+    {
         $this->repository->create($request->all());
 
         return redirect()
-               ->route('permissions.index')
-               ->with('message', 'Permissão cadastrada com sucesso!');
-     }
-
-     
+            ->route('permissions.index')
+            ->with('message', 'Permissão cadastrada com sucesso!');
+    }
+    
     /**
-     * Show the form for editing the specified resource.
+     * edit
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  mixed $id
+     * @return void
      */
     public function edit($id)
     {
@@ -84,50 +88,49 @@ class PermissionController extends Controller
 
         return view('admin.pages.permissions.edit', compact('permission'));
     }
-
+    
     /**
-     * Update the specified resource in storage.
+     * update
      *
-     * @param  \App\Http\Requests\StoreUpdatePermission  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
      */
     public function update(StoreUpdatePermission $request, $id)
     {
-       if(!$permission = $this->repository->find($id)) 
-           return redirect()->back();
-       
-       $permission->update($request->all());
-
-       return redirect()
-       ->route('permissions.index')
-       ->with('message', 'Permissão editada com sucesso!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-     public function destroy($id)
-     {
-        if(!$permission = $this->repository->find($id))
+        if (!$permission = $this->repository->find($id))
             return redirect()->back();
-        
+
+        $permission->update($request->all());
+
+        return redirect()
+            ->route('permissions.index')
+            ->with('message', 'Permissão editada com sucesso!');
+    }
+ 
+    /**
+     * destroy
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function destroy($id)
+    {
+        if (!$permission = $this->repository->find($id))
+            return redirect()->back();
+
         $permission->delete();
 
         return redirect()
-        ->route('permissions.index')
-        ->with('message', 'Permissão deletada com sucesso!'); 
-     }
-
+            ->route('permissions.index')
+            ->with('message', 'Permissão deletada com sucesso!');
+    }
+    
     /**
-     * Search results
+     * search
      *
-     * @param  Request $request
-     * @return \Illuminate\Http\Response
+     * @param  mixed $request
+     * @return void
      */
     public function search(Request $request)
     {

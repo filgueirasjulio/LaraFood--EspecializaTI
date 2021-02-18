@@ -10,15 +10,18 @@ use App\Http\Requests\StoreUpdateUser;
 class UserController extends Controller
 {
     private $repository;
-
+    
     /**
-     * @param User $user
+     * __construct
+     *
+     * @param  mixed $user
+     * @return void
      */
     public function __construct(User $user)
     {
         $this->repository = $user;
     }
-    
+        
     /**
      * index
      *
@@ -47,7 +50,7 @@ class UserController extends Controller
 
         return view('admin.pages.profiles.show', ['profile' => $profile]);
     }
-    
+        
     /**
      * create
      *
@@ -57,7 +60,7 @@ class UserController extends Controller
     {
         return view('admin.pages.users.create');
     }
-    
+        
     /**
      * store
      *
@@ -66,15 +69,16 @@ class UserController extends Controller
      */
     public function store(StoreUpdateUser $request)
     {
-       $company =  auth()->user()->company;
-       
+        $data = $request->all();
+        $data['company_id'] = auth()->user()->company->id;
+
         $this->repository->create($request->all());
 
         return redirect()
-               ->route('users.index')
-               ->with('message', 'Usuários cadastrado com sucesso!');
+            ->route('users.index')
+            ->with('message', 'Usuários cadastrado com sucesso!');
     }
-    
+        
     /**
      * edit
      *
@@ -87,7 +91,7 @@ class UserController extends Controller
         
         return view('admin.pages.profiles.edit', compact('profile'));
     }
-    
+        
     /**
      * update
      *
@@ -106,7 +110,7 @@ class UserController extends Controller
        ->route('profiles.index')
        ->with('message', 'Perfil editado com sucesso!');
     }
-    
+        
     /**
      * destroy
      *
@@ -125,7 +129,7 @@ class UserController extends Controller
         ->with('message', 'Perfil deletado com sucesso!'); 
     }
     
-    /**
+     /**
      * search
      *
      * @param  mixed $request

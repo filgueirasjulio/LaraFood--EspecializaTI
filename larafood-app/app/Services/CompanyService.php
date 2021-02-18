@@ -9,11 +9,10 @@ class CompanyService
     private $plan, $data = [];
     
     /**
-     * make
-     *
-     * @param  mixed $plan
-     * @param  mixed $data
-     * @return void
+     * @param Plan $plan
+     * @param array $data
+     * 
+     * @return [type]
      */
     public function make(Plan $plan, array $data)
     {
@@ -27,9 +26,7 @@ class CompanyService
     }   
     
     /**
-     * storeCompanie
-     *
-     * @return void
+     * @return [type]
      */
     public function storeCompany()
     {
@@ -43,12 +40,11 @@ class CompanyService
             'expires_at' => now()->addDays(7)
           ]);   
     }
-    
+
     /**
-     * storeUser
-     *
-     * @param  mixed $company
-     * @return void
+     * @param mixed $company
+     * 
+     * @return [type]
      */
     public function storeUser($company)
     {
