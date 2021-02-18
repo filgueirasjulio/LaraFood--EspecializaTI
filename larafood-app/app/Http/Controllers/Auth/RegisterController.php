@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Services\CompanieService;
+use App\Services\CompanyService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -81,9 +81,9 @@ class RegisterController extends Controller
 
       $plan = session('plan');
 
-      $companieService = app(CompanieService::class);
+      $companyService = app(CompanyService::class);
 
-      $user = $companieService->make($plan, $data);
+      $user = $companyService->make($plan, $data);
       return $user;
     }
 }

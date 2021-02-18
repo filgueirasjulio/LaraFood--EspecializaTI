@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->latest()->paginate();
+        $users = $this->repository->latest()->companyUser()->paginate();
         $filter = '';
 
         return view('admin.pages.users.index', compact('users', 'filter'));
@@ -43,12 +43,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $profile = $this->repository->where('id', $id)->first();
-        if (!$profile) {
+        $user = $this->repository->where('id', $id)->first();
+        if (!$user) {
             return redirect()->back();
         }
 
-        return view('admin.pages.profiles.show', ['profile' => $profile]);
+        return view('admin.pages.users.show', ['user' => $user]);
     }
         
     /**
@@ -71,8 +71,9 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['company_id'] = auth()->user()->company->id;
+        $data['password'] = bcrypt($data['password']);
 
-        $this->repository->create($request->all());
+        $this->repository->create($data);
 
         return redirect()
             ->route('users.index')
@@ -87,9 +88,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $profile = $this->repository->find($id);
+        $user = $this->repository->find($id);
         
-        return view('admin.pages.profiles.edit', compact('profile'));
+        return view('admin.pages.users.edit', compact('user'));
     }
         
     /**
@@ -101,13 +102,14 @@ class UserController extends Controller
      */
     public function update(StoreUpdateUser $request, $id)
     {
-       if(!$profile = $this->repository->find($id)) 
+       if(!$user = $this->repository->find($id)) {
            return redirect()->back();
-       
-       $profile->update($request->all());
+       }
+
+       $user->update($request->all());
 
        return redirect()
-       ->route('profiles.index')
+       ->route('users.index')
        ->with('message', 'Perfil editado com sucesso!');
     }
         
@@ -119,13 +121,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if(!$profile = $this->repository->find($id)) 
-        return redirect()->back();
+        if(!$user = $this->repository->find($id)) {
+            return redirect()->back();
+        }
     
-        $profile->delete();
+        $user->delete();
 
         return redirect()
-        ->route('profiles.index')
+        ->route('users.index')
         ->with('message', 'Perfil deletado com sucesso!'); 
     }
     
@@ -138,10 +141,10 @@ class UserController extends Controller
     public function search(Request $request)
     {
         $filter = $request->except('_token');
-        $profiles = $this->repository->search($request->filter);
+        $users = $this->repository->search($request->filter);
 
-        return view('admin.pages.profiles.index', [
-            'profiles' => $profiles,
+        return view('admin.pages.users.index', [
+            'users' => $users,
             'filter' => $filter,
         ]);
     }

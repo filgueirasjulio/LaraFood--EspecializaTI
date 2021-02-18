@@ -5,6 +5,18 @@ Route::prefix('admin')
        ->middleware('auth')
        ->group(function() {
 
+    /** routes users */
+    Route::any('/usuarios/busca', 'UserController@search')->name('users.search');
+
+    Route::get('/usuarios','UserController@index')->name('users.index');
+    Route::get('/usuario/cadastro', 'UserController@create')->name('users.create');
+    Route::get('/usuario/{id}', 'UserController@show')->name('users.show');
+    Route::get('/usuario/{id}/edicao', 'UserController@edit')->name('users.edit');
+
+    Route::post('/usuario/cadastro', 'UserController@store')->name('users.store');
+    Route::put('/usuario/{id}', 'UserController@update')->name('users.update');
+    Route::delete('/usuario/{id}', 'UserController@destroy')->name('users.destroy');
+
     /** routes plans */
     Route::any('/planos/busca', 'PlanController@search')->name('plans.search');
 

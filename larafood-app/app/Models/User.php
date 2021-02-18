@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'company_id',
     ];
 
     /**
@@ -35,7 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-        
+
+    /**
+     * Scope a query to only users by company
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeCompanyUser($query)
+    {
+        return $query->where('company_id', auth()->user()->company_id);
+    }
+
     /**
      * company
      *
@@ -45,7 +57,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Company::class);
     }
-    
+
     /**
      * search
      *
@@ -55,8 +67,8 @@ class User extends Authenticatable
     public function search($filter = null)
     {
         $results = $this->orWhere('name', 'LIKE', "%{$filter}%")
-                        ->orWhere('email', 'LIKE', "%{$filter}%")
-                        ->paginate();
+            ->orWhere('email', 'LIKE', "%{$filter}%")
+            ->paginate();
         return $results;
     }
 }

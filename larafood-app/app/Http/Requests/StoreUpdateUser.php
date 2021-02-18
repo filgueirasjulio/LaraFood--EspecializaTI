@@ -25,10 +25,15 @@ class StoreUpdateUser extends FormRequest
     {
         $id = $this->segment(3);
 
-        return [
+        $rules = [
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'string', 'email', 'min:3', 'max:255', "unique:users,email,{$id},id"],
-            'password' => ['required', 'string', 'min:6', 'max:16'],
         ];
+
+        if ($this->method() == 'POST') {
+            $rules['password'] = ['required', 'string', 'min:6', 'max:16'];
+        }
+
+        return $rules;
     }
 }
