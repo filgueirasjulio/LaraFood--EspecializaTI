@@ -42,4 +42,14 @@ class Company extends Model
     {
         return $this->belongsTo(Plan::class);
     }
+   
+    /**
+     * categories
+     *
+     * @return void
+     */
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

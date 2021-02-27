@@ -250,6 +250,11 @@ return [
             'text' => 'Usuários',
             'url' => 'admin/usuarios',
             'icon' => 'fas fa-users',
+        ],
+        [
+            'text' => 'Categorias',
+            'url' => 'admin/categorias',
+            'icon' => 'fas fa-layer-group',
         ]
     ],
 
