@@ -2,17 +2,12 @@
 
 namespace App\Models;
 
+use App\Companies\Traits\CompanyTrait;
 use Illuminate\Database\Eloquent\Model;
-use App\Companies\Observers\ManagerCompanyObserver;
 
 class Category extends Model
 {
+    use CompanyTrait;
+
     protected $fillable = ['name', 'url', 'description'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::observe(ManagerCompanyObserver::class);
-    }
 }
