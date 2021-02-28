@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateCategory;
 
 class CategoryController extends Controller
 {
@@ -32,5 +32,30 @@ class CategoryController extends Controller
         $filter = '';
 
         return view('admin.pages.categories.index', compact('categories', 'filter'));
+    }
+    
+    /**
+     * create
+     *
+     * @return void
+     */
+    public function create()
+    {
+        return view('admin.pages.categories.create'); 
+    }
+    
+    /**
+     * store
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function store(StoreUpdateCategory $request)
+    {
+        $this->repository->create($request->all());
+
+        return redirect()
+               ->route('categories.index')
+               ->with('message', 'Categoria adicionada com sucesso!');
     }
 }
