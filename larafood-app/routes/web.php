@@ -18,7 +18,7 @@ Route::prefix('admin')
     Route::delete('/usuario/{id}', 'UserController@destroy')->name('users.destroy');
 
     /** categories */
-    Route::any('/categorias/busca', 'UserController@search')->name('categories.search');
+    Route::any('/categorias/busca', 'CategoryController@search')->name('categories.search');
 
     Route::get('/categorias','CategoryController@index')->name('categories.index');
     Route::get('/categoria/cadastro', 'CategoryController@create')->name('categories.create');
@@ -27,7 +27,7 @@ Route::prefix('admin')
 
     Route::post('/categoria/cadastro', 'CategoryController@store')->name('categories.store');
     Route::put('/categoria/{id}', 'CategoryController@update')->name('categories.update');
-    Route::delete('/categoria/{id}', 'CategoryrController@destroy')->name('categories.destroy');
+    Route::delete('/categoria/{id}', 'CategoryController@destroy')->name('categories.destroy');
 
     /** routes plans */
     Route::any('/planos/busca', 'PlanController@search')->name('plans.search');
