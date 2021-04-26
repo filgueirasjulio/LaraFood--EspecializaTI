@@ -12,6 +12,10 @@ class ManagerCompanyObserver
     {
         $managerCompany = app(ManagerCompany::class);
 
-        $model->company_id = $managerCompany->getCompanyIdentify();
+        $identify = $managerCompany->getCompanyIdentify();
+
+        if ($identify) {
+            $model->company_id = $identify;
+        }
     }
 }

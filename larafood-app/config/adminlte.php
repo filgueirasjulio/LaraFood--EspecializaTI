@@ -255,6 +255,11 @@ return [
             'text' => 'Categorias',
             'url' => 'admin/categorias',
             'icon' => 'fas fa-layer-group',
+        ],
+        [
+            'text' => 'Produtos',
+            'url' => 'admin/produtos',
+            'icon' => 'fab fa-product-hunt',
         ]
     ],
 

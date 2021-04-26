@@ -10,21 +10,19 @@ class ManagerCompany
     /**
      * getCompanyIdentify
      *
-     * @return int
      */
-    public function getCompanyIdentify():int
+    public function getCompanyIdentify()
     {
-        return auth()->user()->company_id;
+        return auth()->check() ? auth()->user()->company_id : '';
     }
     
     /**
      * getCompany
      *
-     * @return Company
      */
-    public function getCompany(): Company
+    public function getCompany()
     {
-        return auth()->user->company;
+        return auth()->check() ? auth()->user()->company : '';
     }
         
     /**

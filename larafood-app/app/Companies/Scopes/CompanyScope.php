@@ -18,7 +18,11 @@ class CompanyScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $managerCompany = app(ManagerCompany::class);
-        $builder->where('company_id', $managerCompany->getCompanyIdentify());
+        $identify = app(ManagerCompany::class)->getCompanyIdentify();
+
+
+        if ($identify) {
+            $builder->where('company_id', $identify);
+        }
     }
 }

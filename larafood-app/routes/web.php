@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::prefix('admin')
        ->namespace('Admin')
        ->middleware('auth')
@@ -97,8 +100,20 @@ Route::prefix('admin')
     Route::get('/perfil/{id}/planos/vincular', 'ACL\PlanProfileController@plansAvailable')->name('profiles.plans.available');
     Route::get('/perfil/{id}/plano/{idPlano}/desvincular', 'ACL\PlanProfileController@detachPlansProfile')->name('profiles.plans.detach');
     Route::get('/plano/{id}/perfis', 'ACL\PlanProfileController@profiles')->name('plans.profiles');
-
     Route::post('/perfil/{id}/planos/vincular', 'ACL\PlanProfileController@attachPlansProfile')->name('profiles.plans.attach');
+
+
+    /** routes products  */
+    Route::any('/produtos/busca', 'ProductController@search')->name('products.search');
+
+    Route::get('/produtos','ProductController@index')->name('products.index');
+    Route::get('/produto/cadastro', 'ProductController@create')->name('products.create');
+    Route::get('/produto/{id}', 'ProductController@show')->name('products.show');
+    Route::get('/produto/{id}/edicao', 'ProductController@edit')->name('products.edit');
+
+    Route::post('/produto/cadastro', 'ProductController@store')->name('products.store');
+    Route::put('/produto/{id}', 'ProductController@update')->name('products.update');
+    Route::delete('/produto/{id}', 'ProductController@destroy')->name('products.destroy');
 
     /** Home */
     Route::get('/', 'PlanController@index')->name('admin.index');
