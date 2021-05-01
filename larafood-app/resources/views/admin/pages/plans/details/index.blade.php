@@ -7,7 +7,7 @@
         <a href="{{ route('plans.index') }}" class="btn btn-sm btn-dark" style="font-size:16px;padding-right:5px;"><i class="fas fa-backward"></i></a>
     </div>
 
-    <div class="container" style="margin-top:15px;">
+    <div class="container-fluid" style="margin-top:15px;">
         <div class="row justify-content-between">
             <h1>Detalhes do {{ $plan->name }}</h1> <a href="{{ route('details.plan.create', $plan->url) }}" class="btn btn-dark"><strong
                 style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> detalhe</a>

@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', 'Mesas')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row justify-content-between">
-            <h1>Planos</h1> <a href="{{ route('plans.create') }}" class="btn btn-dark"><strong
-                    style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> Plano</a>
+            <h1>Mesas</h1> <a href="{{ route('tables.create') }}" class="btn btn-dark"><strong
+                    style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> Mesa</a>
         </div>
     </div>
 @stop
@@ -15,14 +15,14 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex">
-                <form action="{{ route('plans.search') }}" method="POST" class="d-flex">
+                <form action="{{ route('tables.search') }}" method="POST" class="d-flex">
                     @csrf
                     <input type="text" name="filter" class="form-control" value="{{ $filter['filter'] ?? '' }}">
                     <button type="submit" class="btn btn-sm btn-dark"><i class="fas fa-search"></i></button>
                 </form>
                 @if($filter && $filter != '')
                     <strong style="font-size:16px; margin-left:20px; margin-top:7px;"> Desfazer busca 
-                        <a href="{{route('plans.index')}}"><i class="fas fa-sync-alt" style="padding-left:5px;"></i></a>
+                        <a href="{{route('tables.index')}}"><i class="fas fa-sync-alt" style="padding-left:5px;"></i></a>
                     </strong> 
                 @endif
             </div>
@@ -32,36 +32,28 @@
             @include('admin.includes.alerts')
 
             <table class="table table-condensed">
-                @if ($plans->count())
+                @if ($tables->count())
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>Preço</th>
+                            <th>Identificador</th>
                             <th>Descrição</th>
                             <th style="width:180px;">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($plans as $plan)
+                        @foreach ($tables as $table)
                             <tr>
                                 <td>
-                                    {{ $plan->name }}
+                                    {{ $table->identify }}
                                 </td>
                                 <td>
-                                    R$ {{ number_format($plan->price, 2, ',', '.') }}
+                                    {{ $table->description }}
                                 </td>
                                 <td>
-                                    {{ $plan->description }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-sm btn-info" alt="Ver"
+                                    <a href="{{ route('tables.show', $table->id) }}" class="btn btn-sm btn-info" alt="Ver"
                                         title="Ver"><i class="fas fa-eye"></i></a>
-                                    <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-sm btn-warning" alt="Editar"
+                                    <a href="{{ route('tables.edit', $table->id) }}" class="btn btn-sm btn-warning" alt="Editar"
                                         title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-sm btn-secondary"
-                                        alt="Detalhes" title="Detalhes"><i class="fas fa-asterisk"></i></a>
-                                    <a href="{{ route('plans.profiles', $plan->id) }}" class="btn btn-sm"  style="background-color: #b2ff59;"
-                                        alt="Detalhes" title="Perfis"><i class="fas fa-users"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -69,7 +61,7 @@
                 @else
                     <tbody>
                         <tr>
-                            <td style="font-size:18px">Nenhum plano para ser exibido!</td>
+                            <td style="font-size:18px">Nenhuma mesa para ser exibida!</td>
                         </tr>
                     </tbody>
                 @endif
@@ -77,9 +69,9 @@
         </div>
         <div class="card-footer">
             @if (isset($filter))
-                {!! $plans->appends($filter) !!}
+                {!! $tables->appends($filter) !!}
             @else
-                {!! $plans !!}
+                {!! $tables !!}
             @endif
 
         </div>

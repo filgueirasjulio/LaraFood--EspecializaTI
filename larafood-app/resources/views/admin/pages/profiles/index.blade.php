@@ -3,9 +3,9 @@
 @section('title', 'Planos')
 
 @section('content_header')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-between">
-            <h1>Perfis</h1> <a href="{{ route('profiles.create') }}" class="btn btn-sm btn-dark"><strong
+            <h1>Perfis</h1> <a href="{{ route('profiles.create') }}" class="btn btn-dark"><strong
                 style="font-size:16px;padding-right:5px;"><i class="fas fa-plus"></i></strong> Perfil</a>
         </div>
     </div>

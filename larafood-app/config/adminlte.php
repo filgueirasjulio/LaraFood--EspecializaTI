@@ -260,7 +260,12 @@ return [
             'text' => 'Produtos',
             'url' => 'admin/produtos',
             'icon' => 'fab fa-product-hunt',
-        ]
+        ],
+        [
+            'text' => 'Mesas',
+            'url'  => 'admin/tables',
+            'icon' => 'fas fa-tablet'
+        ],
     ],
 
     /*

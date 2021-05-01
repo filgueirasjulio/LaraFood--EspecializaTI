@@ -115,6 +115,10 @@ Route::prefix('admin')
     Route::put('/produto/{id}', 'ProductController@update')->name('products.update');
     Route::delete('/produto/{id}', 'ProductController@destroy')->name('products.destroy');
 
+    /** routes tables */
+    Route::any('tables/search', 'TableController@search')->name('tables.search');
+    Route::resource('tables', 'TableController');
+
     /** Home */
     Route::get('/', 'PlanController@index')->name('admin.index');
 });
