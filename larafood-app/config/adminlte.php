@@ -263,7 +263,7 @@ return [
         ],
         [
             'text' => 'Mesas',
-            'url'  => 'admin/tables',
+            'url'  => 'admin/mesas',
             'icon' => 'fas fa-tablet'
         ],
     ],

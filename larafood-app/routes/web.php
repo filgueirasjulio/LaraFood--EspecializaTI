@@ -116,8 +116,16 @@ Route::prefix('admin')
     Route::delete('/produto/{id}', 'ProductController@destroy')->name('products.destroy');
 
     /** routes tables */
-    Route::any('tables/search', 'TableController@search')->name('tables.search');
-    Route::resource('tables', 'TableController');
+    Route::any('/mesas/busca', 'CategoryController@search')->name('tables.search');
+
+    Route::get('/mesas','TableController@index')->name('tables.index');
+    Route::get('/mesa/cadastro', 'TableController@create')->name('tables.create');
+    Route::get('/mesa/{id}', 'TableController@show')->name('tables.show');
+    Route::get('/mesa/{id}/edicao', 'TableController@edit')->name('tables.edit');
+
+    Route::post('/mesa/cadastro', 'TableController@store')->name('tables.store');
+    Route::put('/mesa/{id}', 'TableController@update')->name('tables.update');
+    Route::delete('/mesa/{id}', 'TableController@destroy')->name('tables.destroy');
 
     /** Home */
     Route::get('/', 'PlanController@index')->name('admin.index');
